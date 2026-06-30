@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CodeCrystal · Informativa</title>
+  <!-- Google Material Symbols (solo iconos) -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  <style>
+    /* ----- Reset y base minimalista ----- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    body {
+      background: #fafafa;
+      color: #1e1e1e;
+      padding: 16px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Paleta CodeCrystal (blanco/negro/minimal) */
+    :root {
+      --bg: #ffffff;
+      --surface: #f5f5f5;
+      --border: #d0d0d0;
+      --text: #1e1e1e;
+      --text-light: #555;
+      --shadow: 0 2px 10px rgba(0,0,0,0.04);
+      --radius: 20px;
+    }
+
+    a {
+      color: var(--text);
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    /* ----- Iconos Material (sin emojis) ----- */
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      vertical-align: middle;
+      line-height: 1;
+      font-size: 1.4rem;
+    }
+    .icon-sm {
+      font-size: 1.1rem;
+    }
+    .icon-md {
+      font-size: 1.6rem;
+    }
+    .icon-lg {
+      font-size: 2.2rem;
+    }
+    .icon-xl {
+      font-size: 3rem;
+    }
+    .icon-2xl {
+      font-size: 3.6rem;
+    }
+
+    /* ----- Header / navegación ----- */
+    .navbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 0 16px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 28px;
+      gap: 12px;
+    }
+
+    .logo {
+      font-weight: 600;
+      font-size: 1.6rem;
+      letter-spacing: -0.02em;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .logo span {
+      background: #000;
+      color: #fff;
+      padding: 2px 14px 2px 12px;
+      border-radius: 40px;
+      font-weight: 500;
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 20px;
+      align-items: center;
+      font-size: 0.95rem;
+    }
+    .nav-links a {
+      font-weight: 450;
+      color: var(--text);
+      border-bottom: 2px solid transparent;
+      padding-bottom: 4px;
+      transition: 0.15s;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .nav-links a:hover {
+      border-bottom-color: #000;
+      text-decoration: none;
+    }
+    .btn-outline {
+      border: 1px solid var(--border);
+      padding: 6px 20px;
+      border-radius: 40px;
+      background: transparent;
+      transition: 0.2s;
+      font-weight: 500;
+    }
+    .btn-outline:hover {
+      background: #000;
+      color: #fff;
+      border-color: #000;
+      text-decoration: none;
+    }
+
+    /* ----- Hero ----- */
+    .hero {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 30px;
+      padding: 10px 0 36px;
+    }
+    .hero-content {
+      flex: 1 1 380px;
+    }
+    .hero-content h1 {
+      font-size: 2.6rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .hero-content p {
+      font-size: 1.1rem;
+      color: var(--text-light);
+      max-width: 500px;
+      line-height: 1.6;
+      margin-bottom: 22px;
+    }
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .btn-primary {
+      background: #000;
+      color: #fff;
+      border: none;
+      padding: 12px 32px;
+      border-radius: 40px;
+      font-weight: 500;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.15s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn-primary:hover {
+      opacity: 0.8;
+      text-decoration: none;
+    }
+    .btn-secondary {
+      background: transparent;
+      border: 1px solid var(--border);
+      padding: 12px 32px;
+      border-radius: 40px;
+      font-weight: 500;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.15s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn-secondary:hover {
+      background: #f0f0f0;
+      border-color: #888;
+    }
+
+    .hero-graphic {
+      flex: 1 1 280px;
+      background: #f0f0f0;
+      border-radius: var(--radius);
+      padding: 36px 24px;
+      text-align: center;
+      border: 1px solid var(--border);
+      min-height: 160px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .hero-graphic .code-snip {
+      font-size: 0.85rem;
+      background: #fff;
+      padding: 6px 18px;
+      border-radius: 40px;
+      border: 1px solid var(--border);
+      font-family: 'Monaco', monospace;
+      letter-spacing: 0.2px;
+      margin-top: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* ----- Secciones informativas ----- */
+    .section-title {
+      font-size: 1.6rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      margin-bottom: 36px;
+    }
+
+    .info-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px 20px;
+      box-shadow: var(--shadow);
+      transition: 0.15s;
+    }
+    .info-card:hover {
+      border-color: #aaa;
+    }
+    .info-card .material-symbols-outlined {
+      font-size: 2rem;
+      color: #000;
+      margin-bottom: 8px;
+      display: inline-block;
+    }
+    .info-card h3 {
+      font-weight: 600;
+      font-size: 1.05rem;
+      margin-bottom: 4px;
+    }
+    .info-card p {
+      color: var(--text-light);
+      font-size: 0.92rem;
+      line-height: 1.5;
+    }
+
+    /* ----- Características técnicas (ramas, carpetas, lenguajes) ----- */
+    .tech-showcase {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px 26px;
+      margin-bottom: 36px;
+      box-shadow: var(--shadow);
+    }
+    .tech-showcase h3 {
+      font-weight: 600;
+      font-size: 1.2rem;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .tech-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 14px;
+      margin: 10px 0 8px;
+    }
+    .tech-badge {
+      background: #f0f0f0;
+      padding: 4px 16px;
+      border-radius: 40px;
+      font-size: 0.82rem;
+      font-weight: 450;
+      border: 1px solid #e0e0e0;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .tree-example {
+      background: #f7f7f7;
+      padding: 14px 18px;
+      border-radius: 16px;
+      font-family: 'Monaco', 'Menlo', monospace;
+      font-size: 0.78rem;
+      border: 1px solid #e0e0e0;
+      margin-top: 12px;
+      color: #222;
+      line-height: 1.8;
+      overflow-x: auto;
+    }
+    .tree-example .folder {
+      color: #000;
+      font-weight: 500;
+    }
+    .tree-example .file {
+      color: var(--text-light);
+    }
+    .future-note {
+      margin-top: 14px;
+      font-size: 0.9rem;
+      background: #fafafa;
+      padding: 10px 18px;
+      border-radius: 40px;
+      border: 1px solid var(--border);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* ----- Dominios / recomendaciones ----- */
+    .domain-section {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px 24px;
+      margin: 24px 0 16px;
+      box-shadow: var(--shadow);
+      gap: 12px;
+    }
+    .domain-section p {
+      font-size: 0.92rem;
+      color: var(--text-light);
+    }
+    .domain-section strong {
+      color: #000;
+    }
+    .domain-badge {
+      background: #eee;
+      padding: 3px 14px;
+      border-radius: 40px;
+      font-size: 0.78rem;
+      font-weight: 500;
+      margin: 0 3px;
+      display: inline-block;
+    }
+    .domain-badge:hover {
+      background: #ddd;
+    }
+
+    /* ----- Footer ----- */
+    .footer {
+      border-top: 1px solid var(--border);
+      margin-top: 28px;
+      padding: 20px 0 10px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      font-size: 0.82rem;
+      color: #888;
+      gap: 8px;
+    }
+    .footer a {
+      color: #888;
+      text-decoration: underline;
+    }
+
+    /* ----- Responsive (móvil / pc) ----- */
+    @media (max-width: 640px) {
+      body { padding: 12px; }
+      .navbar { flex-direction: column; align-items: flex-start; gap: 8px; }
+      .logo { font-size: 1.4rem; }
+      .hero-content h1 { font-size: 2rem; }
+      .hero-content p { font-size: 1rem; }
+      .hero-graphic { padding: 24px 16px; min-height: 120px; }
+      .cards-grid { grid-template-columns: 1fr; }
+      .tech-showcase { padding: 18px; }
+      .domain-section { flex-direction: column; align-items: flex-start; }
+      .section-title { font-size: 1.3rem; }
+      .nav-links { gap: 8px 14px; }
+    }
+
+    @media (min-width: 641px) and (max-width: 900px) {
+      .cards-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    /* Ajuste para iconos material en móvil */
+    .material-symbols-outlined {
+      font-size: 1.3rem;
+    }
+    .icon-lg { font-size: 2rem; }
+    .icon-xl { font-size: 2.6rem; }
+    .icon-2xl { font-size: 3rem; }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <!-- ===== HEADER ===== -->
+  <header class="navbar">
+    <div class="logo">
+      <span>◈</span> CodeCrystal
+    </div>
+    <div class="nav-links">
+      <a href="#caracteristicas"><span class="material-symbols-outlined icon-sm">star</span> Características</a>
+      <a href="#tecnico"><span class="material-symbols-outlined icon-sm">account_tree</span> Ramas</a>
+      <a href="#dominios"><span class="material-symbols-outlined icon-sm">public</span> Dominios</a>
+      <a href="#" class="btn-outline"><span class="material-symbols-outlined icon-sm">login</span> Acceder</a>
+    </div>
+  </header>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>
+        <span class="material-symbols-outlined icon-lg">code</span> CodeCrystal
+      </h1>
+      <p>
+        Plataforma minimalista para desarrolladores. Guarda tus proyectos de
+        <strong>HTML, CSS y JavaScript</strong> en ramas y carpetas,
+        como en GitHub. Diseño limpio, blanco y negro.
+      </p>
+      <div class="hero-actions">
+        <a href="#" class="btn-primary"><span class="material-symbols-outlined">rocket_launch</span> Comenzar</a>
+        <a href="#" class="btn-secondary"><span class="material-symbols-outlined">info</span> Explorar</a>
+      </div>
+    </div>
+    <div class="hero-graphic">
+      <span class="material-symbols-outlined icon-2xl">folder_open</span>
+      <div class="code-snip">
+        <span class="material-symbols-outlined icon-sm">account_tree</span> main · /proyectos
+      </div>
+      <div style="margin-top:8px; font-size:0.8rem; color:#888; display:flex; gap:8px; align-items:center;">
+        <span><span class="material-symbols-outlined icon-sm">html</span> HTML</span>
+        <span><span class="material-symbols-outlined icon-sm">css</span> CSS</span>
+        <span><span class="material-symbols-outlined icon-sm">javascript</span> JS</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CARACTERÍSTICAS ===== -->
+  <h2 id="caracteristicas" class="section-title">
+    <span class="material-symbols-outlined">stars</span> ¿Qué ofrece CodeCrystal?
+  </h2>
+  <div class="cards-grid">
+    <div class="info-card">
+      <span class="material-symbols-outlined">account_circle</span>
+      <h3>Perfil con proyectos</h3>
+      <p>Tu espacio personal con todos tus proyectos organizados por ramas y carpetas.</p>
+    </div>
+    <div class="info-card">
+      <span class="material-symbols-outlined">search</span>
+      <h3>Búsqueda integrada</h3>
+      <p>Encuentra perfiles, proyectos y ramas fácilmente desde un solo buscador.</p>
+    </div>
+    <div class="info-card">
+      <span class="material-symbols-outlined">star</span>
+      <h3>Estrellas</h3>
+      <p>Da reconocimiento a los proyectos que más te gusten. Suma estrellas.</p>
+    </div>
+    <div class="info-card">
+      <span class="material-symbols-outlined">help</span>
+      <h3>Ayuda y guía</h3>
+      <p>Información clara sobre cómo usar la plataforma y recomendaciones.</p>
+    </div>
+  </div>
+
+  <!-- ===== TECNOLOGÍAS / RAMAS Y CARPETAS ===== -->
+  <h2 id="tecnico" class="section-title">
+    <span class="material-symbols-outlined">account_tree</span> Estructura técnica
+  </h2>
+  <div class="tech-showcase">
+    <h3>
+      <span class="material-symbols-outlined">folder_shared</span> Ramas y carpetas estilo GitHub
+    </h3>
+    <p style="color:var(--text-light); margin-bottom:6px;">
+      Organiza tu código como en un repositorio. Cada proyecto puede tener múltiples ramas y una estructura de carpetas.
+    </p>
+    <div class="tech-badges">
+      <span class="tech-badge"><span class="material-symbols-outlined icon-sm">html</span> HTML</span>
+      <span class="tech-badge"><span class="material-symbols-outlined icon-sm">css</span> CSS</span>
+      <span class="tech-badge"><span class="material-symbols-outlined icon-sm">javascript</span> JavaScript</span>
+      <span class="tech-badge"><span class="material-symbols-outlined icon-sm">account_tree</span> Ramas</span>
+      <span class="tech-badge"><span class="material-symbols-outlined icon-sm">folder</span> Carpetas</span>
+    </div>
+    <div class="tree-example">
+      <div><span class="folder"><span class="material-symbols-outlined icon-sm" style="font-size:0.9rem;">folder</span> proyecto-demo/</span></div>
+      <div style="padding-left:20px;"><span class="folder"><span class="material-symbols-outlined icon-sm" style="font-size:0.9rem;">folder</span> src/</span></div>
+      <div style="padding-left:40px;"><span class="file"><span class="material-symbols-outlined icon-sm" style="font-size:0.8rem;">description</span> index.html</span></div>
+      <div style="padding-left:40px;"><span class="file"><span class="material-symbols-outlined icon-sm" style="font-size:0.8rem;">description</span> style.css</span></div>
+      <div style="padding-left:40px;"><span class="file"><span class="material-symbols-outlined icon-sm" style="font-size:0.8rem;">description</span> app.js</span></div>
+      <div style="padding-left:20px;"><span class="folder"><span class="material-symbols-outlined icon-sm" style="font-size:0.9rem;">folder</span> assets/</span></div>
+      <div style="padding-left:40px;"><span class="file"><span class="material-symbols-outlined icon-sm" style="font-size:0.8rem;">folder</span> img/</span></div>
+      <div style="padding-left:20px;"><span class="folder"><span class="material-symbols-outlined icon-sm" style="font-size:0.9rem;">folder</span> docs/</span></div>
+      <div style="padding-left:40px;"><span class="file"><span class="material-symbols-outlined icon-sm" style="font-size:0.8rem;">description</span> README.md</span></div>
+      <div style="margin-top:8px; font-size:0.75rem; color:#888; display:flex; gap:12px; align-items:center;">
+        <span><span class="material-symbols-outlined icon-sm">account_tree</span> rama: main</span>
+        <span><span class="material-symbols-outlined icon-sm">account_tree</span> feature/nueva-ui</span>
+      </div>
+    </div>
+    <div class="future-note">
+      <span class="material-symbols-outlined">arrow_forward</span> Próximamente: soporte para Python, Go y más lenguajes
+    </div>
+  </div>
+
+  <!-- ===== DOMINIOS / RECOMENDACIONES ===== -->
+  <h2 id="dominios" class="section-title">
+    <span class="material-symbols-outlined">public</span> Dominios y despliegue
+  </h2>
+  <div class="domain-section">
+    <div>
+      <p>
+        <strong><span class="material-symbols-outlined">rocket_launch</span> ¿Quieres un dominio para tu proyecto?</strong><br />
+        Te recomendamos estos proveedores:
+        <span class="domain-badge">Namecheap</span>
+        <span class="domain-badge">GoDaddy</span>
+        <span class="domain-badge">Porkbun</span>
+        <span class="domain-badge">Cloudflare</span>
+      </p>
+      <p style="font-size:0.82rem; margin-top:4px; color:#888;">
+        <span class="material-symbols-outlined icon-sm">info</span> CodeCrystal solo guarda tus proyectos, no vendemos dominios.
+      </p>
+    </div>
+    <div>
+      <span style="background:#000; color:#fff; padding:8px 24px; border-radius:40px; font-weight:500; display:inline-flex; align-items:center; gap:6px;">
+        <span class="material-symbols-outlined">upload</span> Sube tu proyecto
+      </span>
+    </div>
+  </div>
+
+  <!-- ===== INFO ADICIONAL ===== -->
+  <div style="display:flex; flex-wrap:wrap; gap:16px; margin:16px 0 8px;">
+    <div style="flex:1; min-width:180px; background:var(--bg); border:1px solid var(--border); border-radius:16px; padding:16px 20px;">
+      <h4 style="font-weight:600; display:flex; align-items:center; gap:6px;">
+        <span class="material-symbols-outlined">groups</span> Comunidad
+      </h4>
+      <p style="font-size:0.9rem; color:var(--text-light);">Comparte tus proyectos, recibe feedback y conecta con otros desarrolladores.</p>
+    </div>
+    <div style="flex:1; min-width:180px; background:var(--bg); border:1px solid var(--border); border-radius:16px; padding:16px 20px;">
+      <h4 style="font-weight:600; display:flex; align-items:center; gap:6px;">
+        <span class="material-symbols-outlined">code</span> Estilo GitHub
+      </h4>
+      <p style="font-size:0.9rem; color:var(--text-light);">Ramas, carpetas, estrellas y búsqueda. Familiar y potente.</p>
+    </div>
+    <div style="flex:1; min-width:180px; background:var(--bg); border:1px solid var(--border); border-radius:16px; padding:16px 20px;">
+      <h4 style="font-weight:600; display:flex; align-items:center; gap:6px;">
+        <span class="material-symbols-outlined">palette</span> Minimalista
+      </h4>
+      <p style="font-size:0.9rem; color:var(--text-light);">Diseño en blanco y negro, enfocado en la legibilidad y el contenido.</p>
+    </div>
+  </div>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <span>
+      <span class="material-symbols-outlined icon-sm">copyright</span> 2026 CodeCrystal · web informativa
+    </span>
+    <span>
+      <span class="material-symbols-outlined icon-sm">code</span> HTML · CSS · JS &nbsp;|&nbsp;
+      <span class="material-symbols-outlined icon-sm">account_tree</span> ramas y carpetas
+    </span>
+    <span>
+      <a href="#"><span class="material-symbols-outlined icon-sm">login</span> Login</a> ·
+      <a href="#"><span class="material-symbols-outlined icon-sm">app_registration</span> Registro</a>
+    </span>
+  </footer>
+
+</div>
+
+<!-- ===== SCRIPT DEMO ===== -->
+<script>
+  // Acciones demo
+  document.querySelectorAll('.btn-primary, .btn-secondary, .btn-outline, .domain-section .btn-primary, .hero-actions a, .footer a').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+      const href = this.getAttribute('href');
+      if (href && href.startsWith('#')) {
+        e.preventDefault();
+        const target = document.querySelector(href);
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+        return;
+      }
+      if (href === '#' || !href) {
+        e.preventDefault();
+        const text = this.textContent.trim();
+        if (text.includes('Comenzar') || text.includes('Acceder') || text.includes('Login')) {
+          alert('Módulo Login / Registro · (demo)');
+        } else if (text.includes('Explorar')) {
+          alert('Explorar proyectos · (demo)');
+        } else if (text.includes('Sube')) {
+          alert('Sube tu proyecto · solo HTML, CSS, JS');
+        } else if (text.includes('Registro')) {
+          alert('Registro de usuario · (demo)');
+        } else {
+          alert('Acción demo · CodeCrystal');
+        }
+      }
+    });
+  });
+
+  console.log('CodeCrystal · Web informativa (material icons)');
+</script>
+</body>
+</html>
