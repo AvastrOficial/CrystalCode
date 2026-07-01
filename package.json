@@ -1,5 +1,9 @@
 {
   "name": "codecrystal",
   "version": "1.0.0",
-  "description": "CodeCrystal - Plataforma para desarrolladores"
+  "description": "CodeCrystal - Plataforma para desarrolladores",
+  "main": "index.html",
+  "scripts": {
+    "build": "echo 'No build needed'"
+  }
 }
