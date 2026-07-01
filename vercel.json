@@ -1,24 +1,30 @@
 {
-  "rewrites": [
+  "builds": [
     {
-      "source": "/v/r/google",
-      "destination": "/index.html"
+      "src": "index.html",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/v/r/google",
+      "dest": "/index.html"
     },
     {
-      "source": "/v/r/github",
-      "destination": "/index.html"
+      "src": "/v/r/github",
+      "dest": "/index.html"
     },
     {
-      "source": "/inicio",
-      "destination": "/index.html"
+      "src": "/inicio",
+      "dest": "/index.html"
     },
     {
-      "source": "/v/panel",
-      "destination": "/index.html"
+      "src": "/v/panel",
+      "dest": "/index.html"
     },
     {
-      "source": "/(.*)",
-      "destination": "/index.html"
+      "src": "/(.*)",
+      "dest": "/index.html"
     }
   ],
   "headers": [
