@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CodeCrystal · Informativa</title>
+  <title>CodeCrystal · Autenticación</title>
   <!-- Google Material Symbols (solo iconos) -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
   <style>
@@ -24,7 +24,6 @@
       flex-direction: column;
     }
 
-    /* Paleta CodeCrystal (blanco/negro/minimal) */
     :root {
       --bg: #ffffff;
       --surface: #f5f5f5;
@@ -56,21 +55,11 @@
       line-height: 1;
       font-size: 1.4rem;
     }
-    .icon-sm {
-      font-size: 1.1rem;
-    }
-    .icon-md {
-      font-size: 1.6rem;
-    }
-    .icon-lg {
-      font-size: 2.2rem;
-    }
-    .icon-xl {
-      font-size: 3rem;
-    }
-    .icon-2xl {
-      font-size: 3.6rem;
-    }
+    .icon-sm { font-size: 1.1rem; }
+    .icon-md { font-size: 1.6rem; }
+    .icon-lg { font-size: 2.2rem; }
+    .icon-xl { font-size: 3rem; }
+    .icon-2xl { font-size: 3.6rem; }
 
     /* ----- Header / navegación ----- */
     .navbar {
@@ -128,6 +117,7 @@
       background: transparent;
       transition: 0.2s;
       font-weight: 500;
+      cursor: pointer;
     }
     .btn-outline:hover {
       background: #000;
@@ -380,7 +370,245 @@
       background: #ddd;
     }
 
-    /* ----- Footer ----- */
+    /* ===== FORMULARIO DE AUTENTICACIÓN (overlay) ===== */
+    .auth-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      backdrop-filter: blur(4px);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+    .auth-overlay.active {
+      display: flex;
+    }
+
+    .auth-container {
+      max-width: 440px;
+      width: 100%;
+      background: #fff;
+      border-radius: 20px;
+      padding: 40px 32px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      position: relative;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .auth-close {
+      position: absolute;
+      top: 16px;
+      right: 20px;
+      background: none;
+      border: none;
+      font-size: 1.6rem;
+      cursor: pointer;
+      color: #888;
+      transition: 0.15s;
+    }
+    .auth-close:hover {
+      color: #000;
+    }
+
+    .auth-header {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+    .auth-header .logo {
+      font-weight: 700;
+      font-size: 1.8rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .auth-header .logo span {
+      background: #000;
+      color: #fff;
+      padding: 2px 16px 2px 14px;
+      border-radius: 40px;
+      font-weight: 500;
+    }
+    .auth-header h2 {
+      font-weight: 600;
+      font-size: 1.3rem;
+      margin-top: 12px;
+      margin-bottom: 4px;
+    }
+    .auth-header p {
+      color: var(--text-light);
+      font-size: 0.9rem;
+    }
+
+    /* Mensaje de estado */
+    .message {
+      padding: 10px 16px;
+      border-radius: 40px;
+      font-size: 0.9rem;
+      margin-bottom: 16px;
+      display: none;
+    }
+    .message.error {
+      display: block;
+      background: #fee;
+      color: #c00;
+      border: 1px solid #fcc;
+    }
+    .message.success {
+      display: block;
+      background: #efe;
+      color: #060;
+      border: 1px solid #cfc;
+    }
+
+    /* Botones sociales */
+    .social-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .btn-social {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      width: 100%;
+      padding: 12px 20px;
+      border-radius: 40px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      font-weight: 500;
+      font-size: 0.95rem;
+      color: var(--text);
+      cursor: pointer;
+      transition: 0.15s;
+    }
+    .btn-social:hover {
+      background: #f5f5f5;
+      border-color: #aaa;
+    }
+    .btn-social.google:hover {
+      background: #f1f3f4;
+      border-color: #4285f4;
+    }
+    .btn-social.github:hover {
+      background: #f0f0f0;
+      border-color: #000;
+    }
+    .btn-social .material-symbols-outlined {
+      font-size: 1.6rem;
+    }
+
+    /* Divisor */
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin: 16px 0 22px;
+      color: #aaa;
+      font-size: 0.85rem;
+    }
+    .divider::before,
+    .divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* Formulario */
+    .form-group {
+      margin-bottom: 16px;
+    }
+    .form-group label {
+      display: block;
+      font-weight: 500;
+      font-size: 0.9rem;
+      margin-bottom: 5px;
+      color: var(--text);
+    }
+    .form-group label .optional {
+      font-weight: 400;
+      color: #999;
+      font-size: 0.8rem;
+    }
+    .form-group input {
+      width: 100%;
+      padding: 12px 16px;
+      border-radius: 40px;
+      border: 1px solid var(--border);
+      font-size: 0.95rem;
+      background: #fafafa;
+      transition: 0.15s;
+      outline: none;
+    }
+    .form-group input:focus {
+      border-color: #000;
+      background: #fff;
+      box-shadow: 0 0 0 3px rgba(0,0,0,0.04);
+    }
+    .input-icon {
+      position: relative;
+    }
+    .input-icon .material-symbols-outlined {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #888;
+      font-size: 1.2rem;
+    }
+    .input-icon input {
+      padding-left: 44px;
+    }
+
+    .btn-submit {
+      width: 100%;
+      padding: 14px;
+      border-radius: 40px;
+      border: none;
+      background: #000;
+      color: #fff;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.15s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 4px;
+    }
+    .btn-submit:hover {
+      opacity: 0.85;
+    }
+
+    .auth-footer {
+      text-align: center;
+      margin-top: 18px;
+      font-size: 0.9rem;
+      color: var(--text-light);
+    }
+    .auth-footer a {
+      color: #000;
+      font-weight: 500;
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: 0.15s;
+      cursor: pointer;
+    }
+    .auth-footer a:hover {
+      border-bottom-color: #000;
+    }
+
+    /* ----- Footer principal ----- */
     .footer {
       border-top: 1px solid var(--border);
       margin-top: 28px;
@@ -395,9 +623,10 @@
     .footer a {
       color: #888;
       text-decoration: underline;
+      cursor: pointer;
     }
 
-    /* ----- Responsive (móvil / pc) ----- */
+    /* ----- Responsive ----- */
     @media (max-width: 640px) {
       body { padding: 12px; }
       .navbar { flex-direction: column; align-items: flex-start; gap: 8px; }
@@ -410,13 +639,13 @@
       .domain-section { flex-direction: column; align-items: flex-start; }
       .section-title { font-size: 1.3rem; }
       .nav-links { gap: 8px 14px; }
+      .auth-container { padding: 28px 18px; }
     }
 
     @media (min-width: 641px) and (max-width: 900px) {
       .cards-grid { grid-template-columns: repeat(2, 1fr); }
     }
 
-    /* Ajuste para iconos material en móvil */
     .material-symbols-outlined {
       font-size: 1.3rem;
     }
@@ -437,7 +666,7 @@
       <a href="#caracteristicas"><span class="material-symbols-outlined icon-sm">star</span> Características</a>
       <a href="#tecnico"><span class="material-symbols-outlined icon-sm">account_tree</span> Ramas</a>
       <a href="#dominios"><span class="material-symbols-outlined icon-sm">public</span> Dominios</a>
-      <a href="#" class="btn-outline"><span class="material-symbols-outlined icon-sm">login</span> Acceder</a>
+      <button class="btn-outline" id="openAuthBtn"><span class="material-symbols-outlined icon-sm">login</span> Acceder</button>
     </div>
   </header>
 
@@ -453,8 +682,8 @@
         como en GitHub. Diseño limpio, blanco y negro.
       </p>
       <div class="hero-actions">
-        <a href="#" class="btn-primary"><span class="material-symbols-outlined">rocket_launch</span> Comenzar</a>
-        <a href="#" class="btn-secondary"><span class="material-symbols-outlined">info</span> Explorar</a>
+        <button class="btn-primary" id="heroComenzar"><span class="material-symbols-outlined">rocket_launch</span> Comenzar</button>
+        <button class="btn-secondary" id="heroExplorar"><span class="material-symbols-outlined">info</span> Explorar</button>
       </div>
     </div>
     <div class="hero-graphic">
@@ -554,7 +783,7 @@
       </p>
     </div>
     <div>
-      <span style="background:#000; color:#fff; padding:8px 24px; border-radius:40px; font-weight:500; display:inline-flex; align-items:center; gap:6px;">
+      <span style="background:#000; color:#fff; padding:8px 24px; border-radius:40px; font-weight:500; display:inline-flex; align-items:center; gap:6px; cursor:pointer;" id="subirProyecto">
         <span class="material-symbols-outlined">upload</span> Sube tu proyecto
       </span>
     </div>
@@ -592,46 +821,305 @@
       <span class="material-symbols-outlined icon-sm">account_tree</span> ramas y carpetas
     </span>
     <span>
-      <a href="#"><span class="material-symbols-outlined icon-sm">login</span> Login</a> ·
-      <a href="#"><span class="material-symbols-outlined icon-sm">app_registration</span> Registro</a>
+      <span class="material-symbols-outlined icon-sm">login</span> <a id="footerLogin">Login</a> ·
+      <span class="material-symbols-outlined icon-sm">app_registration</span> <a id="footerRegistro">Registro</a>
     </span>
   </footer>
 
 </div>
 
-<!-- ===== SCRIPT DEMO ===== -->
+<!-- ===== OVERLAY DE AUTENTICACIÓN ===== -->
+<div class="auth-overlay" id="authOverlay">
+  <div class="auth-container">
+    <button class="auth-close" id="closeAuthBtn">
+      <span class="material-symbols-outlined">close</span>
+    </button>
+
+    <div class="auth-header">
+      <div class="logo">
+        <span>◈</span> CodeCrystal
+      </div>
+      <h2 id="authTitle">Accede a tu cuenta</h2>
+      <p id="authSubtitle">Ingresa con email o usa tu cuenta de Google / GitHub</p>
+    </div>
+
+    <!-- Mensaje de estado -->
+    <div class="message" id="message"></div>
+
+    <!-- Botones sociales -->
+    <div class="social-buttons">
+      <button class="btn-social google" id="btnGoogle">
+        <span class="material-symbols-outlined">google</span>
+        Continuar con Google
+      </button>
+      <button class="btn-social github" id="btnGithub">
+        <span class="material-symbols-outlined">code</span>
+        Continuar con GitHub
+      </button>
+    </div>
+
+    <!-- Divisor -->
+    <div class="divider">o continúa con email</div>
+
+    <!-- Formulario email -->
+    <form id="loginForm" autocomplete="off">
+      <div class="form-group">
+        <label for="email">Correo electrónico</label>
+        <div class="input-icon">
+          <span class="material-symbols-outlined">mail</span>
+          <input type="email" id="email" placeholder="tu@email.com" required />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="username">Nombre de usuario</label>
+        <div class="input-icon">
+          <span class="material-symbols-outlined">person</span>
+          <input type="text" id="username" placeholder="usuario123" required />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Contraseña</label>
+        <div class="input-icon">
+          <span class="material-symbols-outlined">lock</span>
+          <input type="password" id="password" placeholder="••••••••" required />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="pin">PIN de verificación <span class="optional">(opcional)</span></label>
+        <div class="input-icon">
+          <span class="material-symbols-outlined">pin</span>
+          <input type="text" id="pin" placeholder="6 dígitos (opcional)" maxlength="6" pattern="[0-9]*" />
+        </div>
+      </div>
+
+      <button type="submit" class="btn-submit" id="submitBtn">
+        <span class="material-symbols-outlined">login</span>
+        Iniciar sesión
+      </button>
+    </form>
+
+    <!-- Footer -->
+    <div class="auth-footer">
+      <span id="authFooterText">¿No tienes cuenta? <a id="registerLink">Regístrate aquí</a></span>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SCRIPT ===== -->
 <script>
-  // Acciones demo
-  document.querySelectorAll('.btn-primary, .btn-secondary, .btn-outline, .domain-section .btn-primary, .hero-actions a, .footer a').forEach(btn => {
-    btn.addEventListener('click', function(e) {
-      const href = this.getAttribute('href');
-      if (href && href.startsWith('#')) {
+  (function() {
+    // Elementos del overlay
+    const overlay = document.getElementById('authOverlay');
+    const openBtn = document.getElementById('openAuthBtn');
+    const closeBtn = document.getElementById('closeAuthBtn');
+    const footerLogin = document.getElementById('footerLogin');
+    const footerRegistro = document.getElementById('footerRegistro');
+    const heroComenzar = document.getElementById('heroComenzar');
+
+    // Elementos del formulario
+    const form = document.getElementById('loginForm');
+    const message = document.getElementById('message');
+    const authTitle = document.getElementById('authTitle');
+    const authSubtitle = document.getElementById('authSubtitle');
+    const submitBtn = document.getElementById('submitBtn');
+    const registerLink = document.getElementById('registerLink');
+    const authFooterText = document.getElementById('authFooterText');
+
+    let isRegisterMode = false;
+
+    // ===== ABRIR / CERRAR OVERLAY =====
+    function openAuth() {
+      overlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      // Resetear a modo login
+      setLoginMode();
+    }
+
+    function closeAuth() {
+      overlay.classList.remove('active');
+      document.body.style.overflow = '';
+      // Limpiar mensajes
+      message.className = 'message';
+      message.textContent = '';
+      form.reset();
+    }
+
+    openBtn.addEventListener('click', openAuth);
+    closeBtn.addEventListener('click', closeAuth);
+    footerLogin.addEventListener('click', openAuth);
+    footerRegistro.addEventListener('click', function() {
+      openAuth();
+      setRegisterMode();
+    });
+    heroComenzar.addEventListener('click', openAuth);
+
+    // Cerrar con click fuera del contenedor
+    overlay.addEventListener('click', function(e) {
+      if (e.target === overlay) closeAuth();
+    });
+
+    // Cerrar con ESC
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && overlay.classList.contains('active')) closeAuth();
+    });
+
+    // ===== MODOS: LOGIN / REGISTER =====
+    function setLoginMode() {
+      isRegisterMode = false;
+      authTitle.textContent = 'Accede a tu cuenta';
+      authSubtitle.textContent = 'Ingresa con email o usa tu cuenta de Google / GitHub';
+      submitBtn.innerHTML = '<span class="material-symbols-outlined">login</span> Iniciar sesión';
+      submitBtn.style.background = '#000';
+      authFooterText.innerHTML = '¿No tienes cuenta? <a id="registerLink">Regístrate aquí</a>';
+      document.querySelector('.auth-header .logo span').textContent = '◈';
+      // Re-asignar evento al nuevo enlace
+      document.getElementById('registerLink').addEventListener('click', function(e) {
         e.preventDefault();
-        const target = document.querySelector(href);
-        if (target) {
-          target.scrollIntoView({ behavior: 'smooth' });
-        }
+        setRegisterMode();
+      });
+      // Limpiar mensaje
+      message.className = 'message';
+      message.textContent = '';
+    }
+
+    function setRegisterMode() {
+      isRegisterMode = true;
+      authTitle.textContent = 'Crear cuenta';
+      authSubtitle.textContent = 'Regístrate con email o usa Google / GitHub';
+      submitBtn.innerHTML = '<span class="material-symbols-outlined">app_registration</span> Registrarse';
+      submitBtn.style.background = '#1a1a1a';
+      authFooterText.innerHTML = '¿Ya tienes cuenta? <a id="loginLink">Inicia sesión</a>';
+      document.querySelector('.auth-header .logo span').textContent = '◈';
+      // Re-asignar evento al nuevo enlace
+      document.getElementById('loginLink').addEventListener('click', function(e) {
+        e.preventDefault();
+        setLoginMode();
+      });
+      // Limpiar mensaje
+      message.className = 'message';
+      message.textContent = '';
+    }
+
+    // Evento para el enlace de registro inicial
+    document.getElementById('registerLink').addEventListener('click', function(e) {
+      e.preventDefault();
+      setRegisterMode();
+    });
+
+    // ===== MOSTRAR MENSAJE =====
+    function showMessage(text, type = 'error') {
+      message.textContent = text;
+      message.className = 'message ' + type;
+      setTimeout(() => {
+        message.className = 'message';
+      }, 5000);
+    }
+
+    // ===== ENVÍO DEL FORMULARIO =====
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const email = document.getElementById('email').value.trim();
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value.trim();
+      const pin = document.getElementById('pin').value.trim();
+
+      // Validaciones
+      if (!email || !username || !password) {
+        showMessage('⚠️ Completa todos los campos obligatorios.', 'error');
         return;
       }
-      if (href === '#' || !href) {
-        e.preventDefault();
-        const text = this.textContent.trim();
-        if (text.includes('Comenzar') || text.includes('Acceder') || text.includes('Login')) {
-          alert('Módulo Login / Registro · (demo)');
-        } else if (text.includes('Explorar')) {
-          alert('Explorar proyectos · (demo)');
-        } else if (text.includes('Sube')) {
-          alert('Sube tu proyecto · solo HTML, CSS, JS');
-        } else if (text.includes('Registro')) {
-          alert('Registro de usuario · (demo)');
-        } else {
-          alert('Acción demo · CodeCrystal');
-        }
-      }
-    });
-  });
 
-  console.log('CodeCrystal · Web informativa (material icons)');
+      if (!email.includes('@') || !email.includes('.')) {
+        showMessage('⚠️ Ingresa un correo electrónico válido.', 'error');
+        return;
+      }
+
+      if (username.length < 3) {
+        showMessage('⚠️ El nombre de usuario debe tener al menos 3 caracteres.', 'error');
+        return;
+      }
+
+      if (password.length < 6) {
+        showMessage('⚠️ La contraseña debe tener al menos 6 caracteres.', 'error');
+        return;
+      }
+
+      if (pin && !/^\d{6}$/.test(pin)) {
+        showMessage('⚠️ El PIN debe ser de 6 dígitos numéricos (opcional).', 'error');
+        return;
+      }
+
+      // Datos del formulario
+      const formData = { email, username, password, pin: pin || null };
+      console.log('📝 Datos:', formData);
+
+      const action = isRegisterMode ? 'Registro' : 'Inicio de sesión';
+      showMessage(`✅ ${action} exitoso! Redirigiendo...`, 'success');
+
+      // Redirección a /inicio
+      setTimeout(() => {
+        closeAuth();
+        alert(`🔐 Redirigiendo a /inicio (demo)`);
+        // En producción: window.location.href = '/inicio';
+      }, 1500);
+    });
+
+    // ===== BOTÓN GOOGLE → /v/r/google =====
+    document.getElementById('btnGoogle').addEventListener('click', function() {
+      showMessage('🔵 Autenticando con Google...', 'success');
+      console.log('🔵 Google OAuth iniciado');
+      setTimeout(() => {
+        closeAuth();
+        alert('🔵 Redirigiendo a /v/r/google (demo)');
+        // En producción: window.location.href = '/v/r/google';
+      }, 1200);
+    });
+
+    // ===== BOTÓN GITHUB → /v/r/github =====
+    document.getElementById('btnGithub').addEventListener('click', function() {
+      showMessage('⚫ Autenticando con GitHub...', 'success');
+      console.log('⚫ GitHub OAuth iniciado');
+      setTimeout(() => {
+        closeAuth();
+        alert('⚫ Redirigiendo a /v/r/github (demo)');
+        // En producción: window.location.href = '/v/r/github';
+      }, 1200);
+    });
+
+    // ===== SUBIR PROYECTO =====
+    document.getElementById('subirProyecto').addEventListener('click', function() {
+      alert('Sube tu proyecto (HTML, CSS, JS) · (demo)');
+    });
+
+    // ===== EXPLORAR =====
+    document.getElementById('heroExplorar').addEventListener('click', function() {
+      alert('Explorar proyectos · (demo)');
+    });
+
+    // ===== SCROLL SUAVE PARA ENLACES INTERNOS =====
+    document.querySelectorAll('.nav-links a[href^="#"]').forEach(link => {
+      link.addEventListener('click', function(e) {
+        const targetId = this.getAttribute('href');
+        if (targetId && targetId.startsWith('#')) {
+          e.preventDefault();
+          const target = document.querySelector(targetId);
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth' });
+          }
+        }
+      });
+    });
+
+    console.log('✅ CodeCrystal · Formulario de autenticación completo');
+    console.log('📌 Redirecciones:');
+    console.log('   - Google → /v/r/google');
+    console.log('   - GitHub → /v/r/github');
+    console.log('   - Email/Registro → /inicio');
+  })();
 </script>
 </body>
 </html>
